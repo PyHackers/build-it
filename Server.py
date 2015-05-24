@@ -5,7 +5,7 @@ import json
 import os
 import zipfile
 
-CONF_FILE = "./buildit.cfg"
+CONF_FILE = "/home/likewise-open/ZOHOCORP/tarun-2215/workspace/comp/build-it/buildit.cfg"
 
 SERVER_CONFIG = configparser.RawConfigParser()
 
@@ -17,9 +17,8 @@ app = Flask(__name__)
 def hello():
 	return "Hello World"
 
-@app.route("/upload")
-def upload():
-	#fileUnzipper(file)
+def updateBuild(strURL):
+	processBuild(strURL)
 	cli = Client('unix://var/run/docker.sock')
 	containers = cli.containers()
 	images = cli.images()
@@ -33,6 +32,10 @@ def upload():
 			sContID = str(createdCont.get('Id'))
 			print " Started copy of primary container " + str(createdCont.get('Id')) + " Now going to redirect traffic! "
 			continue
+	secIP = cli.inspect_container(sContID)
+	lJsecIp = secIP['NetworkSettings']['IPAddress']
+	#dJsecIp = secIP.pop(0)
+	print str(lJsecIp)
 	#redirecSecTraffic()
 	#scriptExecutor(pContID)
 	#redirecPriTraffic()
@@ -45,14 +48,13 @@ def upload():
 @app.route('/uploadBuild', methods=['GET', 'POST'])
 def uploadBuild():
 	url = request.form.get('url')
-	print "Url::"
-	print url
-	processBuild(url)
-	return str(url)
+	abc = updateBuild(str(url))
+	return str(abc)
 
 def processBuild(url):
-
-	return ""
+	print " Going to fetch the updated build from URL " 
+	out = os.system("sh fetchBuild.sh url")
+	return "Build fetched"
 	
 def scriptExecutor(pContID):
 	destPath = SERVER_CONFIG.get('BUILD_DETAILS','path')
