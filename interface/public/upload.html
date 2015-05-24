@@ -40,41 +40,39 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="/upload">Upload</a></li>
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation" class="active"><a href="#">Upload</a></li>
             <li role="presentation"><a href="/dashboard">Dashboard</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">build-it</h3>
       </div>
 
-      <div class="jumbotron">
-        <i class="fa fa-code fa-4x">&nbsp;<h1>Build-It</h1></i><br/><br/>
-        <p class="lead">A tool to deploy your build entirely in just one step. We take care of everything including load balancing with no downtime.</p>
-        <p><a class="btn btn-lg btn-success" href="/upload" role="button">Access the App</a></p>
-      </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <p>
+        <h1 class="myfont">Enter your Build Url ...</h1>
+      </p>
+      <p>
+        <input class="form-control input-lg" type="text" id="myurl" placeholder="Build Url">
+        <br/>
+        <input type="file"></input>
+      </p>
+      <br/>
+      <br/>
+      <p><a class="btn btn-lg btn-success" id="uploadBtn" role="button">Upload your build file or paste the url above</a></p>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Economical</h4>
-          <p>Minimises the burden of buying extra physical servers.</p>
-
-          <h4>Great tool for startups</h4>
-          <p>Good for SMEs as they do not want to spend time of deployment.</p>
-
-         
-        </div>
-
-        <div class="col-lg-6">
-          <h4>No Downtime</h4>
-          <p>Yes, We assure you zero downtime.</p>
-
-          <h4>Parallel Testing</h4>
-          <p>Multiple builds can be tested in a same physical machine.</p>
-
-        </div>
-      </div>
-
+      <br/>
+      <br/><br/>
+      <br/>
+      <br/>
+      <br/><br/>
+      <br/><br/>
+      <br/>
+      <br/>
+      <br/>
       <footer class="footer">
         <p>Build with <i class="fa fa-heart"></i> by <a href="https://github.com/pyhackers" target="_blank">PyHackers</a></p>
       </footer>
@@ -84,5 +82,18 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- // <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+      $("#uploadBtn").click(function(e){
+          e.preventDefault();//this will prevent the link trying to navigate to another page
+          var url = $("#myurl").val();
+          $.ajax({
+            method: "POST",
+            url: "http://10.14.120.160:5000/uploadBuild",
+            data: {url : url}
+          });
+          //do the update
+      });
+    </script>
   </body>
 </html>
