@@ -1,3 +1,0 @@
-pip install docker-py
-pip install flask
-pip install configparser

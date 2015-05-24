@@ -1,0 +1,26 @@
+{
+  "name": "build-it",
+  "version": "1.0.0",
+  "authors": [
+    "Dheeraj Joshi <dheerajjoshi1991@gmail.com>"
+  ],
+  "description": "To make deployment in easy steps.",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "docker"
+  ],
+  "private": true,
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "1.11.0",
+    "bootstrap": "~3.3.4",
+    "font-awesome": "~4.3.0"
+  }
+}

@@ -1,11 +1,11 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from docker import Client
 import configparser
 import json
 import os
 import zipfile
 
-CONF_FILE = "/home/likewise-open/ZOHOCORP/tarun-2215/workspace/comp/devops/buildit.cfg"
+CONF_FILE = "./buildit.cfg"
 
 SERVER_CONFIG = configparser.RawConfigParser()
 
@@ -42,6 +42,18 @@ def upload():
 	print str(remRsp)
 	return "Hello World" + str("\n")  + str(containers) + str(pContID) + str(sContID) + str(response)
 
+@app.route('/uploadBuild', methods=['GET', 'POST'])
+def uploadBuild():
+	url = request.form.get('url')
+	print "Url::"
+	print url
+	processBuild(url)
+	return str(url)
+
+def processBuild(url):
+
+	return ""
+	
 def scriptExecutor(pContID):
 	destPath = SERVER_CONFIG.get('BUILD_DETAILS','path')
 	print " Going to execute script and update build in primary "
