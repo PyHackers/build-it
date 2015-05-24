@@ -38,7 +38,7 @@ def uploadBuild():
 def processBuild(url):
 
 	return ""
-	
+
 def scriptExecutor(pContID):
 	destPath = SERVER_CONFIG.get('BUILD_DETAILS','path')
 	out = os.system("sh extract.sh " +  str(pContID) +  " " + str(destPath))
@@ -56,6 +56,14 @@ def closeContainer():
 
 def redirectTraffic():
 	pass
+
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  return response
+ 
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)

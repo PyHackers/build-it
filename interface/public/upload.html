@@ -63,7 +63,7 @@
       <br/>
       <br/>
       <p><a class="btn btn-lg btn-success" id="uploadBtn" role="button">Upload your build file or paste the url above</a></p>
-
+      <div id="myloader"><i class="fa fa-3x fa-pulse fa-spinner"></i></div>
       <br/>
       <br/><br/>
       <br/>
@@ -84,6 +84,7 @@
     <!-- // <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script>
+    $("#myloader").hide();
       $("#uploadBtn").click(function(e){
           e.preventDefault();//this will prevent the link trying to navigate to another page
           var url = $("#myurl").val();
@@ -91,8 +92,15 @@
             method: "POST",
             url: "http://localhost:5000/uploadBuild",
             data: {url : url}
-          });
-          //do the update
+          })
+          .done(function( msg ) {
+            $("#myloader").show();
+              setTimeout(function() { 
+                $("#myloader").hide();
+                alert("Successfully deployed");
+               }, 5000);
+            });
+
       });
     </script>
   </body>

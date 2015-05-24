@@ -24,3 +24,7 @@
 .myfont {
 	font-family: 'Josefin Slab';
 }
+
+#myloader {
+	display: inline;
+}
